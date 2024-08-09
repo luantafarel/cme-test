@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  description: "This is a sample server for a chat system."
+  version: "1.0.0"
+  title: "Chat System API"
+host: "localhost:8080"
+basePath: "/"
+schemes:
+- "http"
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+paths:
+  /register:
+    post:
+      summary: "Register a new user"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User object that needs to be registered"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "User registered successfully"
+  /login:
+    post:
+      summary: "Login a user"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User login object"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+      responses:
+        200:
+          description: "User logged in successfully"
+  /send:
+    post:
+      summary: "Send a message"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Message object that needs to be sent"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+      responses:
+        200:
+          description: "Message sent successfully"
+      security:
+        - Bearer: []
+  /messages:
+    get:
+      summary: "Get message history"
+      responses:
+        200:
+          description: "Message history retrieved successfully"
+      security:
+        - Bearer: []
